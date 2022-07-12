@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./banner.module.css";
+import Image from "next/image";
 
 const Banner = (props) => {
 	const { title, subTitle, imgUrl } = props;
@@ -19,6 +20,12 @@ const Banner = (props) => {
 					<h3 className={styles.subTitle}>{subTitle}</h3>
 					<div className={styles.playBtnWrapper}>
 						<button className={styles.btnWithIcon} onClick={handleOnPlay}>
+							<Image
+								src="/static/play_arrow.svg"
+								alt="Play icon"
+								width="32px"
+								height="32px"
+							/>
 							<span className={styles.playtext}>Play</span>
 						</button>
 					</div>
