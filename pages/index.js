@@ -5,19 +5,10 @@ import Banner from "../components/banner/banner";
 import NavBar from "../components/navbar/navbar";
 import Card from "../components/card/card";
 import SectionCards from "../components/card/section-cards";
+import { getVideos } from "../lib/videos";
 
 export default function Home() {
-	const disneyVideos = [
-		{
-			imgUrl: "/static/carina-nebula.jpg",
-		},
-		{
-			imgUrl: "/static/carina-nebula.jpg",
-		},
-		{
-			imgUrl: "/static/carina-nebula.jpg",
-		},
-	];
+	const disneyVideos = getVideos();
 	return (
 		<div className={styles.container}>
 			<Head>
