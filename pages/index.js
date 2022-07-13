@@ -7,6 +7,17 @@ import Card from "../components/card/card";
 import SectionCards from "../components/card/section-cards";
 
 export default function Home() {
+	const disneyVideos = [
+		{
+			imgUrl: "/static/carina-nebula.jpg",
+		},
+		{
+			imgUrl: "/static/carina-nebula.jpg",
+		},
+		{
+			imgUrl: "/static/carina-nebula.jpg",
+		},
+	];
 	return (
 		<div className={styles.container}>
 			<Head>
@@ -22,7 +33,8 @@ export default function Home() {
 				imgUrl="/static/clifford-the-big-red-dog.jpg"
 			/>
 			<div className={styles.sectionWrapper}>
-				<SectionCards title="Disney" />
+				<SectionCards title="Disney" videos={disneyVideos} size="large" />
+				<SectionCards title="Disney" videos={disneyVideos} size="medium" />
 			</div>
 		</div>
 	);
