@@ -3,6 +3,7 @@ import Image from "next/image";
 import styles from "../styles/Home.module.css";
 import Banner from "../components/banner/banner";
 import NavBar from "../components/navbar/navbar";
+import Card from "../components/card/card";
 
 export default function Home() {
 	return (
@@ -20,7 +21,9 @@ export default function Home() {
 				imgUrl="/static/clifford-the-big-red-dog.jpg"
 			/>
 
-			{/* <Card /> */}
+			<Card imgUrl="/static/carina-nebula.jpg" size="large" />
+			<Card imgUrl="/static/carina-nebula.jpg" size="medium" />
+			<Card imgUrl="/static/carina-nebula.jpg" size="small" />
 		</div>
 	);
 }
