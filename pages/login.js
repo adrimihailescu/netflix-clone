@@ -3,11 +3,15 @@ import Link from "next/link";
 import Image from "next/image";
 import styles from "../styles/login.module.css";
 import { useState } from "react";
+import { useRouter } from "next/router";
+import { magic } from "../lib/magic-client";
 
 const Login = () => {
 	const [userMsg, setUserMsg] = useState("");
 
 	const [email, setEmail] = useState("");
+
+	const router = useRouter();
 
 	const handleOnChangeEmail = (e) => {
 		setUserMsg("");
@@ -16,11 +20,27 @@ const Login = () => {
 		setEmail(email);
 	};
 
-	const handleLoginWithEmail = (e) => {
+	const handleLoginWithEmail = async (e) => {
 		e.preventDefault();
 		console.log("hi button");
 		if (email) {
+			if (email === "adriana.mihalescu@gmail.com") {
+				// log in a user by their email
+				try {
+					const didToken = await magic.auth.loginWithMagicLink({ email });
+					console.log({ didToken });
+					if (didToken) {
+						router.push("/");
+					}
+				} catch (error) {
+					// Handle errors if required!
+					console.error("Something wnet wrong logging in", error);
+				}
+			} else {
+				setUserMsg("Something went wrong!");
+			}
 		} else {
+			//show user message
 			setUserMsg("Enter a valid email address");
 		}
 	};
