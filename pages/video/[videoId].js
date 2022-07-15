@@ -11,11 +11,11 @@ Modal.setAppElement("#__next");
 
 export async function getStaticProps(context) {
 	const videoId = context.params.videoId;
-	const video = await getYoutubeVideoById(videoId);
+	const videoArray = await getYoutubeVideoById(videoId);
 
 	return {
 		props: {
-			video,
+			video: videoArray.length > 0 ? videoArray[0] : {},
 		},
 		revalidate: 10,
 	};
@@ -34,6 +34,7 @@ export async function getStaticPaths() {
 //dynamic route
 const Video = ({ video }) => {
 	const router = useRouter();
+	const videoId = router.query.videoId;
 
 	const {
 		title,
@@ -59,7 +60,7 @@ const Video = ({ video }) => {
 					className={styles.videoPlayer}
 					width="100%"
 					height="360"
-					src={`https://www.youtube.com/embed/${router.query.videoId}?autoplay=0&origin=http://example.com&controls=0&rel=0`}
+					src={`https://www.youtube.com/embed/${videoId}?autoplay=0&origin=http://example.com&controls=0&rel=0`}
 					frameBorder="0"
 				></iframe>
 				<div className={styles.modalBody}>
