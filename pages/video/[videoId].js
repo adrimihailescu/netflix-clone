@@ -2,24 +2,54 @@ import { useRouter } from "next/router";
 import Modal from "react-modal";
 
 import styles from "../../styles/Video.module.css";
+import { getYoutubeVideoById } from "../../lib/videos";
 
 import clsx from "classnames";
 
 Modal.setAppElement("#__next");
 
+export async function getStaticProps(context) {
+	// const video = {
+	// 	title: "Hi cute dog",
+	// 	publishTime: "2021-01-01",
+	// 	description: " A big red dog that is super cure, can he get any bigger?",
+	// 	channelTitle: "Paramount Pictures",
+	// 	viewCount: 10000,
+	// };
+
+	const videoId = context.params.videoId;
+	const video = await getYoutubeVideoById(videoId);
+
+	return {
+		props: {
+			video,
+		},
+		revalidate: 10,
+	};
+}
+
+export async function getStaticPaths() {
+	const listOfVideos = ["mYfJxlgR2jw", "4zH5iYM4wJo", "KCPEHsAViiQ"];
+
+	const paths = listOfVideos.map((videoId) => ({
+		params: { videoId },
+	}));
+
+	return { paths, fallback: "blocking" };
+}
+
 //dynamic route
-const Video = () => {
+const Video = ({ video }) => {
 	const router = useRouter();
 
-	const video = {
-		title: "Hi cute dog",
-		publishTime: "2021-01-01",
-		description: " A big red dog that is super cure, can he get any bigger?",
-		channelTitle: "Paramount Pictures",
-		viewCount: 10000,
-	};
-
-	const { title, publishTime, description, channelTitle, viewCount } = video;
+	const {
+		title,
+		publishTime,
+		description,
+		channelTitle,
+		statistics: { viewCount } = { viewCount: 0 },
+	} = video;
+	console.log({ video });
 	return (
 		<div className={styles.container}>
 			<Modal

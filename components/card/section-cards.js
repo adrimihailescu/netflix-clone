@@ -13,8 +13,10 @@ const SectionCards = (props) => {
 					console.log({ video });
 					// eslint-disable-next-line react/jsx-key
 					return (
-						<Link href={`/video/${videoId}`} key={video.id}>
-							<Card id={idx} imgUrl={video.imgUrl} size={size} />;
+						<Link href={`/video/${video.id}`} key={video.id}>
+							<a>
+								<Card id={idx} imgUrl={video.imgUrl} size={size} />
+							</a>
 						</Link>
 					);
 				})}
