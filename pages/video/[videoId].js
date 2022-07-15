@@ -3,20 +3,13 @@ import Modal from "react-modal";
 
 import styles from "../../styles/Video.module.css";
 import { getYoutubeVideoById } from "../../lib/videos";
+import NavBar from "../../components/navbar/navbar";
 
 import clsx from "classnames";
 
 Modal.setAppElement("#__next");
 
 export async function getStaticProps(context) {
-	// const video = {
-	// 	title: "Hi cute dog",
-	// 	publishTime: "2021-01-01",
-	// 	description: " A big red dog that is super cure, can he get any bigger?",
-	// 	channelTitle: "Paramount Pictures",
-	// 	viewCount: 10000,
-	// };
-
 	const videoId = context.params.videoId;
 	const video = await getYoutubeVideoById(videoId);
 
@@ -52,6 +45,7 @@ const Video = ({ video }) => {
 	console.log({ video });
 	return (
 		<div className={styles.container}>
+			<NavBar />
 			<Modal
 				isOpen={true}
 				contentLabel="Watch the video"
