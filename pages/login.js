@@ -43,6 +43,8 @@ const Login = () => {
 				setIsLoading(true);
 				// log in a user by their email
 				try {
+					setIsLoading(true);
+
 					const didToken = await magic.auth.loginWithMagicLink({ email });
 					console.log({ didToken });
 					if (didToken) {
